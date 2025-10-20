@@ -248,11 +248,11 @@ class MessageFactory {
         if(isLike === null){
             likeBtn.addEventListener('click', async () => {
                 this.toggleAction(likeBtn, dislikeBtn)
-                await window.ApiCaller.postRequest(`/api/message/handle-like/${id}/${true}`, null, true);
+                await window.ApiCaller.postRequest(`/api/message/handle-like`, {id, like:true}, true);
             });
             dislikeBtn.addEventListener('click', async () => {
                 this.toggleAction(dislikeBtn, likeBtn)
-                await window.ApiCaller.postRequest(`/api/message/handle-like/${id}/${false}`, null, true);
+                await window.ApiCaller.postRequest(`/api/message/handle-like`, {id, like:true}, true);
             });
         }
 
@@ -362,7 +362,7 @@ class MessageFactory {
                         // Don't remove DOM element - let refreshCurrentChat handle the update
                         return;
                     case "user":
-                        await window.ApiCaller.postRequest(`/api/message/delete/${id}`, null, true);
+                        await window.ApiCaller.postRequest(`/api/message/delete`, {id}, true);
                         break;
                 }
                 
@@ -376,7 +376,7 @@ class MessageFactory {
 
     async deleteBotMsg(id){
         // Use URL encoding for empty string to avoid path parameter issues
-        const response = await window.ApiCaller.postRequest(`/api/message/updateBot/${id}/%20`, null, true);
+        const response = await window.ApiCaller.postRequest(`/api/message/updateBot`, {id, text:null}, true);
         console.log(response.message);
         
         // Refresh the current chat to show updated state (user delete buttons)
