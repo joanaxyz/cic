@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (container.style.display === 'none') {
-            const response = await window.ApiCaller.postRequest('/auth/send-code-to-mail', { email });
+            const response = await window.ApiCaller.postRequest('/api/auth/send-code-to-mail', { email });
             if (response.success) {
                 window.MessageBox.showSuccess(response.message, () => {
                     container.style.display = 'block';
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showError(response.message);
             }
         } else {
-            const response = await window.ApiCaller.postRequest('/auth/verify-code', { email, code });
+            const response = await window.ApiCaller.postRequest('/api/auth/verify-code', { email, code });
             if (response.success) {
                 const token = response.data;
                 if (!token) return window.MessageBox.showError('No reset token returned', () => {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = i_email.value.trim();
         if (!email) return window.ErrorMessage.show('Email is required.');
 
-        const response = await window.ApiCaller.postRequest('/auth/send-code-to-mail', { email });
+        const response = await window.ApiCaller.postRequest('/api/auth/send-code-to-mail', { email });
         if (response.success) {
             window.MessageBox.showSuccess('A new verification code has been sent.', () => {
                 window.MessageBox.hide();

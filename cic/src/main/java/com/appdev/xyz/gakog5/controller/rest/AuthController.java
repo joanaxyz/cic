@@ -28,7 +28,7 @@ import com.appdev.xyz.gakog5.service.auth.RegistrationService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthService authService;

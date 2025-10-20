@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = urlParams.get("token");
     let currentEmail = null;
 
-    window.ApiCaller.postRequest('/auth/verify-status', { token:token }).then(response => {
+    window.ApiCaller.postRequest('/api/auth/verify-status', { token:token }).then(response => {
         if (response.success) {
             nameElement.textContent = response.data.name;
             emailElement.textContent = response.data.email;
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnVerify.addEventListener('click', () => {
         window.MessageBox.showConfirm('Are you sure you want to verify account registration?', () => {
-            window.ApiCaller.postRequest('/auth/verify-account', { 
+            window.ApiCaller.postRequest('/api/auth/verify-account', { 
                 email: currentEmail
             }).then(response => {
                 if (response.success) {

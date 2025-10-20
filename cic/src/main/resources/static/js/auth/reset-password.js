@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const resetPassword = async (payload) => {
-        const response = await window.ApiCaller.postRequest('/auth/reset-password', payload);
+        const response = await window.ApiCaller.postRequest('/api/auth/reset-password', payload);
 
         if (response.success) {
             window.MessageBox.showSuccess(response.message, () => {

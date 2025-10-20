@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleSignUp = async (userData) => {
-        const response = await window.ApiCaller.postRequest('/auth/sign-up', userData);
+        const response = await window.ApiCaller.postRequest('/api/auth/sign-up', userData);
 
         if (response.success) {
             window.MessageBox.showSuccess(response.message, () => {

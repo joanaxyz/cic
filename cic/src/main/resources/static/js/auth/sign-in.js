@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const handleSignIn = async (em_pass) => {
-        const response = await window.ApiCaller.postRequest('/auth/sign-in', em_pass);
+        const response = await window.ApiCaller.postRequest('/api/auth/sign-in', em_pass);
         if (response.success) {
             window.ApiCaller.auth.setSession(response.data.session, response.data.user);
             window.MessageBox.showSuccess(response.message, () => {

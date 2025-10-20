@@ -141,7 +141,7 @@ class Auth {
     async signOut(callback) {
         console.log(this.getAuthHeaders());
         try {
-            const response = await fetch('/auth/sign-out', {
+            const response = await fetch('/api/auth/sign-out', {
                 method: 'GET',
                 headers: this.getAuthHeaders()
             });
