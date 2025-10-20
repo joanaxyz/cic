@@ -59,7 +59,7 @@ public class MessageController {
     }
 
     @RequireAuth
-    @PostMapping("/updateUser}")
+    @PostMapping("/updateUser")
     public ResponseEntity<?> updateUser(@RequestBody MessageRequest req) {
         try{
             Message message = messageService.updateUserMessage(req.getId(), req.getText());
