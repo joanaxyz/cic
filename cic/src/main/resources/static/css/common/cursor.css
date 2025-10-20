@@ -1,0 +1,7 @@
+* {
+  cursor: url('../../images/cursor.png'), auto;
+}
+
+input {
+    cursor: url('../../images/input.png'), auto;
+}

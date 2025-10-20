@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <!-- Common Meta Tags -->
+  <th:block th:replace="~{fragments/common/head :: meta}"></th:block>
+  
+  <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">CIC</title>
+  
+  <!-- Common Fonts -->
+  <th:block th:replace="~{fragments/common/head :: fonts}"></th:block>
+  
+  <!-- Common CSS -->
+  <th:block th:replace="~{fragments/common/head :: common-css}"></th:block>
+  
+  <!-- Page-specific CSS -->
+  <th:block layout:fragment="css"></th:block>
+  
+  <th:block layout:fragment="extra-head"></th:block>
+</head>
+<body>
+  <!-- Main Body Content -->
+  <div layout:fragment="body">
+    <!-- Default body content goes here if not overridden -->
+  </div>
+
+  <!-- Loading Overlay Component -->
+  <div th:replace="~{fragments/common/loading-overlay :: loading-overlay}"></div>
+
+  <!-- Message Box Component -->
+  <div th:replace="~{fragments/common/message-box :: message-box}"></div>
+    
+  <!-- Common Scripts -->
+  <th:block th:replace="~{fragments/common/scripts :: common-scripts}"></th:block>
+  
+  <!-- Page-specific Scripts -->
+  <th:block layout:fragment="js"></th:block>
+</body>
+</html>

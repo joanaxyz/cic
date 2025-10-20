@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Chat Input Component -->
+    <div th:fragment="chat-input" class="chat-input-container">
+        <div class="chat-input-wrapper">
+            <input type="text" class="chat-input"
+                placeholder="Ask questions about the school (events, directions, services, etc.)">
+            <button class="send-button" aria-label="Send message">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

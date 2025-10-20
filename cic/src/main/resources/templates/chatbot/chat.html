@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base}">
+
+<head>
+    <title>Chat - CIC</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/chat.css}">
+        <link rel="stylesheet" th:href="@{/css/components/search-overlay.css}">
+    </th:block>
+</head>
+
+<body>
+    <div layout:fragment="body">
+        <div class="chat-container">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+
+                <div class="sidebar-header">
+                    <div class="theme-toggle-wrapper">
+                        <div class="theme-toggle" id="themeToggle"></div>
+                        <img id="themeImage" th:src="@{/images/light.png}" alt="Light Mode">
+                    </div>
+                </div>
+
+                <div class="search-container">
+                    <button class = "search-btn">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        </svg> 
+                        Search
+                    </button>
+                </div>
+
+                <!-- Category Selector -->
+                <div class="category-selector-container">
+                    <label class="category-label">Category</label>
+                    <div class="category-dropdown">
+                        <button class="category-dropdown-btn" id="categoryDropdownBtn">
+                            <span class="selected-category" id="selectedCategory"></span>
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path d="M7 10l5 5 5-5z" />
+                            </svg>
+                        </button>
+                        <div class="category-dropdown-menu" id="categoryDropdownMenu">
+                            <!-- Categories will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-menu">
+                    <!-- Chat History Section -->
+                    <div class="chat-history-header">
+                        <span class="menu-text">Chat History</span>
+                        <button class="new-chat-btn" id="newChatBtn" title="New Chat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 11h3v-2h-3V8h-2v3H8v2h3v3h2v-3z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="chat-history-list" id="chatHistoryList">
+                    
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <!-- Profile Dropdown Menu -->
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <!-- Role Badge Item -->
+                        <div class="profile-dropdown-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                            </svg>
+                            <span class="dropdown-item-text">Role:</span>
+                            <span class="user-role-badge student" id="userRoleBadge">Student</span>
+                        </div>
+
+                        <!-- Admin Dashboard Item (only visible for admins) -->
+                        <div class="profile-dropdown-item admin-item" id="adminBtn" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            <span class="dropdown-item-text">Admin Dashboard</span>
+                        </div>
+
+                        <!-- Logout Item -->
+                        <div class="profile-dropdown-item logout-item" id="logoutBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                            </svg>
+                            <span class="dropdown-item-text">Logout</span>
+                        </div>
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="user-profile" id="userProfile">
+                        <div class="user-avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                            </svg>
+                        </div>
+                        <span class="user-name" id="username">User</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="chat-main">
+                <div class="chat-content-wrapper">
+                    <!-- Chat Header with Bot Avatar -->
+                    <div class="chat-header">
+                        <div class="bot-avatar">
+                            <img th:src="@{/images/bot.png}" alt="CIC Bot">
+                        </div>
+                        <span class="bot-name">CIC</span>
+                    </div>
+
+                    <div class="chat-messages">
+                        <!-- Chat messages will be populated here -->
+                        <!-- Preset Options Container will be appended at the bottom by JavaScript -->
+                    </div>
+                    
+                    <!-- Preset Options Container (moved outside chat-messages, will be repositioned by JS) -->
+                    <div class="preset-options-container" id="presetOptionsContainer" style="display: none;">
+                        <!-- Preset options will be populated here -->
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="chat-input-container">
+                        <div class="chat-input-wrapper">
+                            <input type="text" class="chat-input"
+                                placeholder="Ask questions about the school (events, directions, services, etc.)">
+                            <button class="send-button" aria-label="Send message">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="~{chatbot/search-overlay :: search-overlay}"></div>
+    </div>
+    <th:block layout:fragment="js">
+        
+        <script th:src="@{/js/chatbot/handlers/message-factory.js}"></script>
+        <script th:src="@{/js/chatbot/handlers/category-handler.js}"></script>
+        <script th:src="@{/js/chatbot/components/chats-handler.js}"></script>
+        <script th:src="@{/js/chatbot/components/search-overlay.js}"></script>
+        <script th:src="@{/js/chatbot/components/theme-toggle.js}"></script>
+        <script th:src="@{/js/chatbot/chat.js}"></script>
+        <script th:src="@{/js/auth/logout.js}"></script>
+    </th:block>
+</body>
+
+</html>

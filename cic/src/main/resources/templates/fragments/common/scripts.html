@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Common JavaScript Files -->
+    <th:block th:fragment="common-scripts">
+        <script th:src="@{/js/auth/Auth.js}"></script>
+        <script th:src="@{/js/common/api-caller.js}"></script>
+        <script th:src="@{/js/common/utils/message-box.js}"></script>
+        <script th:src="@{/js/common/utils/loading-overlay.js}"></script>
+    </th:block>
+</body>
+</html>

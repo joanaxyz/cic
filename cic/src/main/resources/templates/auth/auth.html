@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+<head>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/auth/auth.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </th:block>
+</head>
+<body>
+    <div layout:fragment="body">
+        <div class="auth-layout">
+            <!-- Left Side - Logo & Branding -->
+            <div class="logo-section">
+                <div th:replace="~{fragments/auth/logo :: logo}"></div>
+                <div class="brand-description">
+                    <h3>Welcome to CIC</h3>
+                    <p>Your intelligent campus companion for quick answers and seamless communication.</p>
+                    <p>Access student services, get instant support, and stay connected with your campus community.</p>
+                </div>
+            </div>
+
+            <!-- Right Side - Form Container -->
+            <div class="form-section">
+                <div class="container">
+                    <th:block layout:fragment="page_title"></th:block>
+                    
+                    <form>
+                        <th:block layout:fragment="form_fields"></th:block>
+                        
+                        <input type="button" value="Submit" id="btn_submit">
+                        
+                        <th:block layout:fragment="form_footer"></th:block>
+                        
+                        <p class="error-msg" id="error_msg"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Auth Scripts -->
+    <th:block layout:fragment="js">
+        <script th:src="@{/js/auth/components/error-message.js}"></script>
+        <script th:src="@{/js/auth/handlers/field-input-listener.js}"></script>
+        <script th:src="@{/js/auth/components/field-validator.js}"></script>
+        <script th:src="@{/js/auth/components/password-toggle.js}"></script>
+        <th:block layout:fragment="auth_js"></th:block>
+    </th:block>
+</body>
+</html>

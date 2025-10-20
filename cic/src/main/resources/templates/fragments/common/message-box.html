@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Message Box Component -->
+    <div th:fragment="message-box" class="messagebox-overlay">
+        <div class="messagebox">
+            <div class="messagebox-title" id="msgbx_title">Title Here</div>
+            <div class="messagebox-message" id="msgbx_body">Your message goes here.</div>
+            <div class="messagebox-buttons">
+                <button class="messagebox-btn" id="msgbx_btn">Cancel</button>
+                <button class="messagebox-btn messagebox-btn-primary" id="msgbx_btn_primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

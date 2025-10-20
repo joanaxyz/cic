@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+  <div th:fragment="sidebar" class="sidebar" id="sidebar">
+    <!-- Glowing Toggle Line -->
+    <div class="sidebar-glow-line" id="sidebarGlowLine" title="Toggle Sidebar"></div>
+    
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <div class="header-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 11a3 3 0 1 1 6 0a3 3 0 0 1-6 0z"/>
+            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h2>CIC Admin</h2>
+          <p class="sidebar-subtitle">Campus Information Control</p>
+        </div>
+      </div>
+      
+      <nav>
+        <div class="nav-item" data-page="dashboard" data-tooltip="Dashboard">
+          <span class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </span>
+          <span class="nav-text">Dashboard</span>
+        </div>
+        <div class="nav-item" data-page="categories" data-tooltip="Categories">
+          <span class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </span>
+          <span class="nav-text">Categories</span>
+        </div>
+        <div class="nav-item" data-page="users" data-tooltip="Users">
+          <span class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </span>
+          <span class="nav-text">Users</span>
+        </div>
+      </nav>
+      
+      <!-- Profile Footer -->
+      <div class="sidebar-footer">
+        <div class="profile-section">
+          <div class="profile-info">
+            <div class="profile-avatar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="profile-details">
+              <span class="profile-name">Admin User</span>
+              <span class="profile-role">Administrator</span>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="logout()" title="Logout">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:fragment="stat-card(icon, value, label, modifier)" 
+       class="stat-card" th:classappend="${modifier}">
+    <div class="stat-icon" th:utext="${icon}"></div>
+    <div class="stat-info">
+      <h3 th:text="${value}">0</h3>
+      <p th:text="${label}">Label</p>
+    </div>
+  </div>
+
+  <button th:fragment="back-button(id, text)" class="back-btn" th:id="${id}">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <span th:text="${text}">Back</span>
+  </button>
+
+  <div th:fragment="page-header(title, description)" class="page-header">
+    <h1 th:text="${title}">Page Title</h1>
+    <p th:text="${description}">Page description</p>
+  </div>
+
+  <div th:fragment="empty-state(message)" class="empty-state">
+    <p th:text="${message}">No data available.</p>
+  </div>
+</body>
+</html>

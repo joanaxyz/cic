@@ -1,0 +1,600 @@
+/* MessageBox Overlay */
+.messagebox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(40, 60, 100, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.messagebox-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* DARK THEME (Default) */
+.messagebox {
+  background: linear-gradient(145deg, rgba(25, 30, 45, 0.98), rgba(35, 40, 60, 0.95));
+  backdrop-filter: blur(24px);
+  border: 2px solid rgba(111, 163, 231, 0.4);
+  border-radius: 24px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 
+              0 15px 40px rgba(111, 163, 231, 0.15),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-width: 420px;
+  max-width: 540px;
+  padding: 42px 48px;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  transform: scale(0.85) translateY(30px);
+  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.messagebox::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(111, 163, 231, 0.08) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.messagebox-overlay.show .messagebox {
+  transform: scale(1) translateY(0);
+}
+
+/* MessageBox Title */
+.messagebox-title {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6FA3E7 0%, #9AC5F4 50%, #6FA3E7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  margin-bottom: 22px;
+  letter-spacing: -0.5px;
+  text-align: center;
+  position: relative;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* MessageBox Message */
+.messagebox-message {
+  font-size: 16px;
+  color: #e8eeff;
+  margin-bottom: 34px;
+  line-height: 1.7;
+  text-align: center;
+  padding: 0 12px;
+  opacity: 0.95;
+}
+
+/* MessageBox Input Container */
+.msgbx-input-container {
+  margin: 24px 0 12px 0;
+  width: 100%;
+  position: relative;
+}
+
+.msgbx-input-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(111, 163, 231, 0.1), rgba(111, 163, 231, 0.05));
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.msgbx-input-container:focus-within::before {
+  opacity: 1;
+}
+
+.msgbx-input {
+  width: 100%;
+  padding: 17px 20px;
+  background: rgba(45, 50, 70, 0.7);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(111, 163, 231, 0.35);
+  border-radius: 14px;
+  color: #ffffff;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  font-size: 15px;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.msgbx-input::placeholder {
+  color: rgba(232, 238, 255, 0.55);
+  transition: color 0.3s ease;
+}
+
+.msgbx-input:focus {
+  border-color: #6FA3E7;
+  background: rgba(45, 50, 70, 0.9);
+  box-shadow: 0 0 0 5px rgba(111, 163, 231, 0.2), 
+              0 8px 25px rgba(111, 163, 231, 0.15);
+  transform: translateY(-2px);
+}
+
+.msgbx-input:focus::placeholder {
+  color: rgba(232, 238, 255, 0.7);
+}
+
+.msgbx-input.error {
+  border-color: #ff6b7a;
+  background: rgba(255, 107, 122, 0.12);
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.msgbx-input.error::placeholder {
+  color: #ff6b7a;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+  20%, 40%, 60%, 80% { transform: translateX(8px); }
+}
+
+/* MessageBox Buttons Container */
+.messagebox-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* MessageBox Buttons */
+.messagebox-btn {
+  padding: 15px 36px;
+  border: 2px solid rgba(111, 163, 231, 0.35);
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: rgba(55, 60, 85, 0.7);
+  backdrop-filter: blur(10px);
+  color: #e8eeff;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  min-width: 130px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.messagebox-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(111, 163, 231, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.messagebox-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.messagebox-btn:hover {
+  background: rgba(55, 60, 85, 0.9);
+  border-color: #6FA3E7;
+  color: #9AC5F4;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(111, 163, 231, 0.35);
+}
+
+.messagebox-btn:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 5px 18px rgba(111, 163, 231, 0.25);
+}
+
+/* Primary Button Style */
+.messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #6FA3E7 50%, #7DAEF0 100%);
+  background-size: 200% auto;
+  color: #ffffff;
+  border-color: #6FA3E7;
+  box-shadow: 0 8px 25px rgba(111, 163, 231, 0.5);
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #5B8FCF 50%, #6FA3E7 100%);
+  background-size: 200% auto;
+  border-color: #7DAEF0;
+  color: #ffffff;
+  box-shadow: 0 10px 35px rgba(111, 163, 231, 0.6),
+              0 0 20px rgba(111, 163, 231, 0.3);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.messagebox-btn-primary::before {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ================================ */
+/* LIGHT THEME */
+/* ================================ */
+.messagebox.light {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(250, 252, 255, 0.95));
+  backdrop-filter: blur(24px);
+  border: 2px solid rgba(111, 163, 231, 0.25);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12), 
+              0 15px 40px rgba(111, 163, 231, 0.12),
+              inset 0 1px 0 rgba(111, 163, 231, 0.05);
+}
+
+.messagebox.light::before {
+  background: radial-gradient(circle, rgba(111, 163, 231, 0.05) 0%, transparent 70%);
+}
+
+.messagebox.light .messagebox-title {
+  background: linear-gradient(135deg, #4A7DBF 0%, #6FA3E7 50%, #5B8FCF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.light .messagebox-message {
+  color: #2a3a50;
+  opacity: 0.9;
+}
+
+.messagebox.light .msgbx-input {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(111, 163, 231, 0.25);
+  color: #2a3a50;
+  box-shadow: 0 5px 20px rgba(111, 163, 231, 0.1);
+}
+
+.messagebox.light .msgbx-input::placeholder {
+  color: rgba(42, 58, 80, 0.5);
+}
+
+.messagebox.light .msgbx-input:focus {
+  border-color: #6FA3E7;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 5px rgba(111, 163, 231, 0.15), 
+              0 8px 25px rgba(111, 163, 231, 0.25);
+  transform: translateY(-2px);
+}
+
+.messagebox.light .msgbx-input.error {
+  border-color: #e74c5e;
+  background: rgba(231, 76, 94, 0.08);
+}
+
+.messagebox.light .msgbx-input.error::placeholder {
+  color: #e74c5e;
+}
+
+.messagebox.light .messagebox-btn {
+  background: rgba(245, 248, 255, 0.9);
+  backdrop-filter: blur(10px);
+  color: #2a3a50;
+  border: 2px solid rgba(111, 163, 231, 0.25);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+.messagebox.light .messagebox-btn:hover {
+  background: rgba(235, 242, 255, 0.98);
+  border-color: #6FA3E7;
+  color: #4A7DBF;
+  box-shadow: 0 8px 25px rgba(111, 163, 231, 0.35);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.messagebox.light .messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #6FA3E7 50%, #7DAEF0 100%);
+  background-size: 200% auto;
+  color: #ffffff;
+  border-color: #6FA3E7;
+  box-shadow: 0 8px 25px rgba(111, 163, 231, 0.5);
+}
+
+.messagebox.light .messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #5B8FCF 50%, #6FA3E7 100%);
+  background-size: 200% auto;
+  border-color: #7DAEF0;
+  color: #ffffff;
+  box-shadow: 0 10px 35px rgba(111, 163, 231, 0.6),
+              0 0 20px rgba(111, 163, 231, 0.3);
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* Light Theme - Blue-based Theme Variations */
+.messagebox.light.theme-error .messagebox-title {
+  background: linear-gradient(135deg, #4A7DBF 0%, #e74c5e 40%, #ff6b7a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.light.theme-error .messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #e74c5e 50%, #ff6b7a 100%);
+  background-size: 200% auto;
+  border-color: #e74c5e;
+  box-shadow: 0 8px 25px rgba(231, 76, 94, 0.45);
+}
+
+.messagebox.light.theme-error .messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #d43f52 50%, #e74c5e 100%);
+  background-size: 200% auto;
+  box-shadow: 0 10px 35px rgba(231, 76, 94, 0.55);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.messagebox.light.theme-error .msgbx-input:focus {
+  border-color: #e74c5e;
+  box-shadow: 0 0 0 5px rgba(231, 76, 94, 0.15), 
+              0 8px 25px rgba(231, 76, 94, 0.25);
+}
+
+.messagebox.light.theme-success .messagebox-title {
+  background: linear-gradient(135deg, #4A7DBF 0%, #2ed573 40%, #45e089 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.light.theme-success .messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #2ed573 50%, #45e089 100%);
+  background-size: 200% auto;
+  border-color: #2ed573;
+  box-shadow: 0 8px 25px rgba(46, 213, 115, 0.45);
+}
+
+.messagebox.light.theme-success .messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #26c961 50%, #2ed573 100%);
+  background-size: 200% auto;
+  box-shadow: 0 10px 35px rgba(46, 213, 115, 0.55);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.messagebox.light.theme-success .msgbx-input:focus {
+  border-color: #2ed573;
+  box-shadow: 0 0 0 5px rgba(46, 213, 115, 0.15), 
+              0 8px 25px rgba(46, 213, 115, 0.25);
+}
+
+.messagebox.light.theme-warning .messagebox-title {
+  background: linear-gradient(135deg, #4A7DBF 0%, #ffb142 40%, #ffc368 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.light.theme-warning .messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #ffb142 50%, #ffc368 100%);
+  background-size: 200% auto;
+  border-color: #ffb142;
+  box-shadow: 0 8px 25px rgba(255, 177, 66, 0.45);
+}
+
+.messagebox.light.theme-warning .messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #e89e30 50%, #ffb142 100%);
+  background-size: 200% auto;
+  box-shadow: 0 10px 35px rgba(255, 177, 66, 0.55);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.messagebox.light.theme-warning .msgbx-input:focus {
+  border-color: #ffb142;
+  box-shadow: 0 0 0 5px rgba(255, 177, 66, 0.15), 
+              0 8px 25px rgba(255, 177, 66, 0.25);
+}
+
+.messagebox.light.theme-info .messagebox-title {
+  background: linear-gradient(135deg, #4A7DBF 0%, #6FA3E7 50%, #9AC5F4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.light.theme-info .msgbx-input:focus {
+  border-color: #6FA3E7;
+  box-shadow: 0 0 0 5px rgba(111, 163, 231, 0.15), 
+              0 8px 25px rgba(111, 163, 231, 0.25);
+}
+
+/* Dark Theme - Blue-based Theme Variations */
+.messagebox.theme-error {
+  border-color: rgba(255, 107, 122, 0.45);
+}
+
+.messagebox.theme-error .messagebox-title {
+  background: linear-gradient(135deg, #6FA3E7 0%, #ff6b7a 40%, #ff8f9e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.theme-error .messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #ff6b7a 50%, #ff8f9e 100%);
+  background-size: 200% auto;
+  border-color: #ff6b7a;
+  box-shadow: 0 8px 25px rgba(255, 107, 122, 0.5);
+}
+
+.messagebox.theme-error .messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #e8586a 50%, #ff6b7a 100%);
+  background-size: 200% auto;
+  box-shadow: 0 10px 35px rgba(255, 107, 122, 0.6);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.messagebox.theme-error .msgbx-input:focus {
+  border-color: #ff6b7a;
+  box-shadow: 0 0 0 5px rgba(255, 107, 122, 0.2), 
+              0 8px 25px rgba(255, 107, 122, 0.25);
+}
+
+.messagebox.theme-success {
+  border-color: rgba(46, 213, 115, 0.45);
+}
+
+.messagebox.theme-success .messagebox-title {
+  background: linear-gradient(135deg, #6FA3E7 0%, #2ed573 40%, #4ce395 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.theme-success .messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #2ed573 50%, #4ce395 100%);
+  background-size: 200% auto;
+  border-color: #2ed573;
+  box-shadow: 0 8px 25px rgba(46, 213, 115, 0.5);
+}
+
+.messagebox.theme-success .messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #26c961 50%, #2ed573 100%);
+  background-size: 200% auto;
+  box-shadow: 0 10px 35px rgba(46, 213, 115, 0.6);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.messagebox.theme-success .msgbx-input:focus {
+  border-color: #2ed573;
+  box-shadow: 0 0 0 5px rgba(46, 213, 115, 0.2), 
+              0 8px 25px rgba(46, 213, 115, 0.25);
+}
+
+.messagebox.theme-warning {
+  border-color: rgba(255, 177, 66, 0.45);
+}
+
+.messagebox.theme-warning .messagebox-title {
+  background: linear-gradient(135deg, #6FA3E7 0%, #ffb142 40%, #ffca70 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.theme-warning .messagebox-btn-primary {
+  background: linear-gradient(135deg, #5B8FCF 0%, #ffb142 50%, #ffca70 100%);
+  background-size: 200% auto;
+  border-color: #ffb142;
+  box-shadow: 0 8px 25px rgba(255, 177, 66, 0.5);
+}
+
+.messagebox.theme-warning .messagebox-btn-primary:hover {
+  background: linear-gradient(135deg, #4A7DBF 0%, #e89e30 50%, #ffb142 100%);
+  background-size: 200% auto;
+  box-shadow: 0 10px 35px rgba(255, 177, 66, 0.6);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.messagebox.theme-warning .msgbx-input:focus {
+  border-color: #ffb142;
+  box-shadow: 0 0 0 5px rgba(255, 177, 66, 0.2), 
+              0 8px 25px rgba(255, 177, 66, 0.25);
+}
+
+.messagebox.theme-info {
+  border-color: rgba(111, 163, 231, 0.45);
+}
+
+.messagebox.theme-info .messagebox-title {
+  background: linear-gradient(135deg, #5B8FCF 0%, #6FA3E7 50%, #9AC5F4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.messagebox.theme-info .msgbx-input:focus {
+  border-color: #6FA3E7;
+  box-shadow: 0 0 0 5px rgba(111, 163, 231, 0.2), 
+              0 8px 25px rgba(111, 163, 231, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .messagebox {
+    min-width: 320px;
+    max-width: 90%;
+    padding: 32px 28px;
+  }
+
+  .messagebox-title {
+    font-size: 24px;
+  }
+
+  .messagebox-message {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .messagebox-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+    min-width: 100px;
+  }
+  
+  .msgbx-input {
+    padding: 15px 18px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .messagebox,
+  .messagebox-overlay,
+  .messagebox-btn,
+  .msgbx-input {
+    animation: none;
+    transition: none;
+  }
+}

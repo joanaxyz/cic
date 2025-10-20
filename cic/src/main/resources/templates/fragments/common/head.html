@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Common Head Meta Tags -->
+    <th:block th:fragment="meta">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Mga Bulakbol">
+    </th:block>
+
+    <!-- Common Fonts -->
+    <th:block th:fragment="fonts">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    </th:block>
+
+    <!-- Common CSS -->
+    <th:block th:fragment="common-css">
+        <link rel="stylesheet" th:href="@{/css/common/variables.css}">
+        <link rel="stylesheet" th:href="@{/css/common/reset.css}">
+        <link rel="stylesheet" th:href="@{/css/common/cursor.css}">
+        <link rel="stylesheet" th:href="@{/css/common/spinner.css}">
+        <link rel="stylesheet" th:href="@{/css/components/message-box.css}">
+    </th:block>
+</head>
+</html>

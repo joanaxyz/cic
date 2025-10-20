@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{auth/auth}">
+<head>
+    <title>Sign Up - CIC</title>
+</head>
+<body>
+    <p layout:fragment="page_title" class="content_title">Sign Up</p>
+    
+    <div layout:fragment="form_fields">
+        <input type="text" id="first_name" placeholder="First Name" required>
+        <input type="text" id="last_name" placeholder="Last Name" required>
+        <input type="email" id="email" placeholder="Email address" required>
+        <div class="password-wrapper">
+            <input type="password" id="password" placeholder="Password" required>
+            <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+        <div class="password-wrapper">
+            <input type="password" id="c_password" placeholder="Confirm password" required>
+            <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+    </div>
+    
+    <p layout:fragment="form_footer" class="auth_link">Already have an account? <a th:href="@{/cic/auth/sign-in}">Sign in</a></p>
+    
+    <th:block layout:fragment="auth_js">
+        <script th:src="@{/js/auth/sign-up.js}"></script>
+    </th:block>
+</body>
+</html>

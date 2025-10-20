@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Category Selector Component -->
+    <div th:fragment="category-selector" class="category-selector-container">
+        <label class="category-label">Category</label>
+        <div class="category-dropdown">
+            <button class="category-dropdown-btn" id="categoryDropdownBtn">
+                <span class="selected-category" id="selectedCategory">All Categories</span>
+                <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10l5 5 5-5z" />
+                </svg>
+            </button>
+            <div class="category-dropdown-menu" id="categoryDropdownMenu">
+                <!-- Categories will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

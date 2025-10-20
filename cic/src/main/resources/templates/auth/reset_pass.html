@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{auth/auth}">
+<head>
+    <title>Reset Password - CIC</title>
+</head>
+<body>
+    <p layout:fragment="page_title" class="content_title">Reset Password</p>
+    
+    <div layout:fragment="form_fields">
+        <div class="password-wrapper">
+            <input type="password" id="password" placeholder="Password" required>
+            <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+        <div class="password-wrapper">
+            <input type="password" id="c_password" placeholder="Confirm password" required>
+            <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+    </div>
+    
+    <th:block layout:fragment="auth_js">
+        <script th:src="@{/js/auth/reset-password.js}"></script>
+    </th:block>
+</body>
+</html>

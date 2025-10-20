@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('../../images/auth_bg.png') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+    transition: background var(--transition-normal);
+}
+
+/* Dark Mode Base Styles */
+body[data-theme="dark"] {
+    filter: brightness(0.9);
+}
+
+body[data-theme="dark"] .sidebar {
+    background-color: var(--sidebar-bg-dark);
+}
+
+body[data-theme="dark"] .chat-content-wrapper {
+    background: var(--content-bg-dark);
+}
+
+body[data-theme="dark"] .bot-name,
+body[data-theme="dark"] .bot-text {
+    color: var(--text-primary-dark);
+}
+
+body[data-theme="dark"] .search-input,
+body[data-theme="dark"] .chat-input {
+    background: rgba(50, 50, 60, 0.95);
+    color: var(--text-primary-dark);
+}
+
+body[data-theme="dark"] .search-input::placeholder,
+body[data-theme="dark"] .chat-input::placeholder {
+    color: var(--text-secondary-dark);
+}
+
+body[data-theme="dark"] .action-btn {
+    background: rgba(60, 60, 70, 0.8);
+}
+
+body[data-theme="dark"] .action-btn:hover {
+    background: rgba(70, 70, 80, 0.9);
+}
+
+/* Main Container */
+.chat-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}

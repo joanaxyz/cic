@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+  <div th:fragment="terminal" class="terminal-container">
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="terminal-title">Terminal - Add Query via Command</div>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-output" id="terminalOutput">
+          <div class="terminal-line">
+            <span class="terminal-success">●</span> Terminal initialized successfully
+          </div>
+          <div class="terminal-line">
+            <span class="terminal-info">Type 'help' for available commands</span>
+          </div>
+        </div>
+        <div class="terminal-input-wrapper">
+          <span class="terminal-prompt">admin@cic:~$</span>
+          <textarea id="terminalInput" class="terminal-input" 
+                    placeholder="Enter command..." autocomplete="off" 
+                    rows="1"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{auth/auth}">
+<head>
+    <title>Forgot Password - CIC</title>
+</head>
+<body>
+    <p layout:fragment="page_title" class="content_title">Forgot Password</p>
+    
+    <div layout:fragment="form_fields">
+        <input type="email" id="email" placeholder="Email address" required>
+        <div id="verification" class="verification-container" style="display: none;">
+            <div class="code-inputs">
+                <input type="text" maxlength="1" class="code-box" inputmode="numeric">
+                <input type="text" maxlength="1" class="code-box" inputmode="numeric">
+                <input type="text" maxlength="1" class="code-box" inputmode="numeric">
+                <input type="text" maxlength="1" class="code-box" inputmode="numeric">
+                <input type="text" maxlength="1" class="code-box" inputmode="numeric">
+                <input type="text" maxlength="1" class="code-box" inputmode="numeric">
+            </div>
+        </div>
+    </div>
+    <p layout:fragment="form_footer" id="resend_code" class="auth_link" style="display: none;">Didn't get the code? <a id="resend_link">Resend</a></p>
+    <th:block layout:fragment="auth_js">
+        <script th:src="@{/js/auth/forgot-password.js}"></script>
+    </th:block>
+</body>
+</html>
